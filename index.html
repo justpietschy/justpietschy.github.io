@@ -3,14 +3,184 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Emma | Marketing and Creative</title>
+  <title>Emma | Marketing, Creative & AI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Hi, I'm Emma.</h1>
-  <p>I work in marketing and creative, and I'm learning to build with code and AI.</p>
 
-  <h2>Work</h2>
-  <p>I work for Zenergy, Timbers at Bigwood, and Bigwood Golf.</p>
+  <nav>
+    <a class="name" href="#">Emma</a>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#project">Project</a></li>
+      <li><a href="#photos">Photos</a></li>
+      <li><a href="#ai">AI</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <header class="hero">
+    <!-- The swooping blue lines -->
+    <svg class="swoops" viewBox="0 0 1440 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <path class="wash" d="M-100 620 C 300 420, 700 760, 1100 520 S 1500 380, 1600 420" />
+      <path class="main" d="M-100 560 C 280 360, 640 720, 1040 470 S 1460 300, 1560 360" />
+      <path class="soft" d="M-100 610 C 320 430, 700 780, 1080 540 S 1480 380, 1580 440" />
+      <path class="soft" d="M600 -50 C 820 150, 1100 60, 1250 260 S 1400 520, 1540 500" />
+    </svg>
+
+    <div class="hero-text">
+      <h1>I run marketing for three brands, and I use AI to do it faster</h1>
+      <p>Marketing coordinator handling social, email, photography, and web for a wellness club, a golf course, and a restaurant. Looking for my next role in tech and AI.</p>
+      <div class="actions">
+        <a class="btn primary" href="resume.pdf">View my résumé</a>
+        <a class="btn" href="#work">See my work</a>
+      </div>
+      <ul class="proof">
+        <li><strong>3</strong> brands managed at once</li>
+        <li><strong>4</strong> platforms run daily</li>
+        <li><strong>[X]%</strong> growth in [your best metric]</li>
+      </ul>
+    </div>
+  </header>
+
+  <svg class="divider" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 40 C 360 0, 1080 60, 1440 15" />
+  </svg>
+
+  <section class="about" id="about">
+    <h2>About me</h2>
+    <p>I run marketing for three brands under one roof: a wellness club, a golf course, and a restaurant. That means social media, newsletters, photography, websites, and app marketing, often in the same afternoon.</p>
+    <p>Now I'm teaching myself the technical side: VS Code, GitHub, and working with AI tools to build things, not just write about them. This site is my first project.</p>
+  </section>
+
+  <svg class="divider" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 20 C 400 60, 1000 0, 1440 45" />
+  </svg>
+
+  <section id="work">
+    <h2>Selected work</h2>
+    <div class="work-list">
+      <article class="work-item">
+        <h3>Social media for three brands</h3>
+        <p>Took over social for a golf course and restaurant on top of the wellness club, building a separate voice and posting plan for each.</p>
+        <p class="result">[Result: e.g. followers up X% in 6 months]</p>
+        <p class="tools">Instagram, Facebook, Google, Yelp</p>
+      </article>
+      <article class="work-item">
+        <h3>Member survey</h3>
+        <p>Built a website survey that sends answers straight to a Google Sheet, then launched it with a Mailchimp campaign.</p>
+        <p class="result">[Result: e.g. X responses, X% open rate]</p>
+        <p class="tools">Web forms, Google Sheets, Mailchimp</p>
+      </article>
+      <article class="work-item">
+        <h3>Photography and drone</h3>
+        <p>Shot food, venue, and aerial photos used in menus, ads, and the website, replacing paid stock and outside photographers.</p>
+        <p class="result">[Result: e.g. photos used across X campaigns]</p>
+        <p><a href="#photos">See the gallery</a></p>
+        <p class="tools">Drone, photo editing</p>
+      </article>
+      <article class="work-item">
+        <h3>This website</h3>
+        <p>Designed and coded by me, working alongside Claude, and published with GitHub Pages.</p>
+        <p class="result">My first coding project, built from scratch</p>
+        <p class="tools">HTML, CSS, VS Code, GitHub, Claude</p>
+      </article>
+    </div>
+  </section>
+
+  <svg class="divider" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 20 C 400 60, 1000 0, 1440 45" />
+  </svg>
+
+  <section id="project">
+    <div class="feature">
+      <div>
+        <h2>Featured project: smart photo resizer</h2>
+        <p>Resizing one photo for Instagram, stories, and Facebook used to take me several minutes in a design app. I built a Python tool that does a whole folder at once.</p>
+        <p>The hard part was cropping. A plain center crop cut people's heads off, so I added face detection and subject detection to keep the important part in frame. Flyers and graphics get fit onto a blurred background instead, so no text is lost.</p>
+        <ul class="steps">
+          <li>One folder in, four social sizes out</li>
+          <li>Finds faces and subjects before cropping</li>
+          <li>Built with Python, Pillow, and OpenCV</li>
+        </ul>
+        <div class="actions">
+          <a class="btn primary" href="photo-resizer.html">Try it yourself</a>
+          <a class="btn" href="https://github.com/justpietschy/image-export">View the code</a>
+        </div>
+      </div>
+      <div class="compare">
+        <figure>
+          <img src="images/before-crop.jpg" alt="Photo cropped with a plain center crop, cutting off the subject">
+          <figcaption>Basic center crop</figcaption>
+        </figure>
+        <figure>
+          <img src="images/after-crop.jpg" alt="Same photo cropped by the tool, with the subject kept in frame">
+          <figcaption>My tool's smart crop</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <svg class="divider" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 40 C 360 0, 1080 60, 1440 15" />
+  </svg>
+
+  <section id="photos">
+    <h2>Photography</h2>
+    <p class="section-intro">Food, venue, and drone photography I shot for menus, ads, and social media.</p>
+    <div class="gallery">
+      <figure class="wide">
+        <img src="images/drone-1.jpg" alt="[Describe the photo, e.g. aerial view of the golf course at sunset]" loading="lazy">
+        <figcaption>[Caption, e.g. Bigwood Golf Course, drone]</figcaption>
+      </figure>
+      <figure>
+        <img src="images/food-1.jpg" alt="[Describe the photo]" loading="lazy">
+        <figcaption>[Caption]</figcaption>
+      </figure>
+      <figure>
+        <img src="images/food-2.jpg" alt="[Describe the photo]" loading="lazy">
+        <figcaption>[Caption]</figcaption>
+      </figure>
+      <figure>
+        <img src="images/venue-1.jpg" alt="[Describe the photo]" loading="lazy">
+        <figcaption>[Caption]</figcaption>
+      </figure>
+      <figure>
+        <img src="images/venue-2.jpg" alt="[Describe the photo]" loading="lazy">
+        <figcaption>[Caption]</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="ai" id="ai">
+    <h2>How I use AI at work</h2>
+    <ul class="ai-list">
+      <li><strong>Copy and newsletters.</strong> I draft with Claude, then edit for each brand's voice, which cuts my writing time [by about X%].</li>
+      <li><strong>Building tools.</strong> I use AI to write and debug code, like this website and the member survey.</li>
+      <li><strong>Learning fast.</strong> I'm teaching myself VS Code and GitHub by building real projects with AI as a coach.</li>
+    </ul>
+  </section>
+
+  <svg class="divider" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 40 C 360 0, 1080 60, 1440 15" />
+  </svg>
+
+  <section class="contact" id="contact">
+    <h2>Let's talk</h2>
+    <p>I'm open to marketing roles in tech and AI, and I'd love to hear about yours.</p>
+    <p><a href="mailto:you@example.com">you@example.com</a></p>
+    <div class="actions">
+      <a class="btn" href="https://www.linkedin.com/in/your-profile">LinkedIn</a>
+      <a class="btn" href="resume.pdf">Download résumé</a>
+      <a class="btn" href="https://github.com/justpietschy">GitHub</a>
+    </div>
+  </section>
+
+  <footer>© 2026 Emma</footer>
+
 </body>
 </html>
