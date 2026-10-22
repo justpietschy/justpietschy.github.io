@@ -1,0 +1,1338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sub Board | Emma Pietsch</title>
+
+  <!-- Fonts: an elegant serif for headings, a clean sans-serif for details -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    /* ---------- Colors and fonts, matching emmapietsch.com ---------- */
+    :root {
+      --paper: #FBFCFD;   /* bottle white, main background */
+      --navy: #1F3A5F;    /* headings, main buttons */
+      --deep: #14263F;    /* dark navy for the top band */
+      --ink: #2B3440;     /* body text */
+      --blue: #3E7CB1;    /* accent blue */
+      --sky: #9CC3E4;     /* light blue on dark navy */
+      --mist: #DCE8F2;    /* pale blue panels and dividers */
+      --muted: #5E6A77;   /* secondary text */
+      --amber: #A06A12;   /* needs a sub */
+      --rose: #A44A4A;    /* canceled, warnings */
+
+      --serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+      --sans: "Jost", "Helvetica Neue", Arial, sans-serif;
+      --width: 960px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-weight: 300;
+      font-size: 1.0625rem;
+      line-height: 1.7;
+    }
+
+    a { color: var(--navy); text-decoration-color: var(--blue); text-underline-offset: 4px; }
+    a:hover { color: var(--blue); }
+
+    /* ---------- Top band (dark navy, like the portfolio's opening) ---------- */
+    .band {
+      background: var(--deep);
+      color: #C9D6E4;
+      padding: 0 1.5rem 3.5rem;
+    }
+
+    .band a { color: #E6EDF5; }
+    .band a:hover { color: var(--sky); }
+    .band a:focus-visible { outline-color: var(--sky); }
+
+    .band nav, .band-text {
+      max-width: var(--width);
+      margin: 0 auto;
+    }
+
+    .band nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+      padding: 2rem 0 4rem;
+    }
+
+    .name {
+      font-family: var(--serif);
+      font-size: 1.9rem;
+      font-weight: 500;
+      text-decoration: none;
+    }
+
+    .band nav a:not(.name) { font-size: 1rem; text-decoration: none; }
+
+    h1 {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(3.25rem, 8vw, 6rem);
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+      color: #FFFFFF;
+      margin: 0 0 1.5rem;
+    }
+
+    .intro {
+      max-width: 40rem;
+      font-size: 1.3rem;
+      color: #E6EDF5;
+      margin: 0 0 1.75rem;
+    }
+
+    /* "Try it" steps: three short columns with a thin line above each,
+       the same style as "How I learn and build" on the homepage */
+    .try-steps {
+      list-style: none;
+      counter-reset: step;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem 2.5rem;
+      max-width: 52rem;
+      padding: 0;
+      margin: 0 0 2rem;
+    }
+
+    .try-steps li {
+      counter-increment: step;
+      border-top: 1px solid rgba(156, 195, 228, 0.4);
+      padding-top: 0.9rem;
+      color: #E6EDF5;
+      line-height: 1.5;
+    }
+
+    .try-steps li::before {
+      content: "Step " counter(step);
+      display: block;
+      font-size: 0.85rem;
+      color: var(--sky);
+      margin-bottom: 0.3rem;
+    }
+
+    @media (max-width: 600px) {
+      .try-steps { grid-template-columns: 1fr; }
+    }
+
+    .fine-print {
+      font-size: 0.9rem;
+      color: #9FB0C3;
+      margin: 0;
+    }
+
+    /* ---------- Page layout ---------- */
+    main {
+      max-width: calc(var(--width) + 3rem);
+      margin: 0 auto;
+      padding: 3rem 1.5rem 6rem;
+    }
+
+    h2, .class-name {
+      font-family: var(--serif);
+      color: var(--navy);
+      line-height: 1.1;
+    }
+
+    h2 { font-size: clamp(2rem, 4vw, 2.75rem); font-weight: 500; margin: 0 0 1.25rem; }
+
+    section { margin-bottom: 5rem; }
+
+    /* ---------- The story behind the project ---------- */
+    .story {
+      max-width: 40rem;
+      margin-bottom: 3rem;
+    }
+
+    .story summary {
+      cursor: pointer;
+      color: var(--navy);
+      font-weight: 400;
+    }
+
+    .story p { margin: 1rem 0 0; }
+
+    /* ---------- Instructor / Manager switch ---------- */
+    .view-switch {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.5rem 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .view-switch .label { font-weight: 400; }
+
+    .view-switch .options {
+      display: inline-flex;
+      border: 1.5px solid var(--navy);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .view-switch button {
+      border: none;
+      border-radius: 0;
+    }
+
+    .view-switch button[aria-pressed="true"] {
+      background: var(--navy);
+      color: var(--paper);
+    }
+
+    .hint {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin: 0 0 3.5rem;
+    }
+
+    /* ---------- Forms ---------- */
+    .panel {
+      background: var(--mist);
+      border-radius: 20px;
+      padding: 2rem;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 1rem;
+      align-items: end;
+    }
+
+    label {
+      display: block;
+      font-size: 0.95rem;
+      font-weight: 400;
+      color: var(--navy);
+      margin-bottom: 0.3rem;
+    }
+
+    input, select, button {
+      font: inherit;
+      color: var(--ink);
+    }
+
+    input[type="text"], input[type="date"], input[type="time"], select {
+      width: 100%;
+      padding: 0.55rem 0.75rem;
+      border: 1px solid #BFD1E2;
+      border-radius: 10px;
+      background: #FFFFFF;
+      height: 2.9rem; /* same height for every field so the labels line up */
+    }
+
+    fieldset {
+      border: none;
+      padding: 0;
+      margin: 1.25rem 0;
+    }
+
+    legend {
+      font-size: 0.95rem;
+      color: var(--navy);
+      margin-bottom: 0.5rem;
+    }
+
+    .checkboxes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 1.5rem;
+    }
+
+    .checkboxes label {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--ink);
+      font-weight: 300;
+      margin: 0;
+    }
+
+    input[type="checkbox"] { accent-color: var(--navy); }
+
+    /* ---------- Buttons (pill shaped, like the portfolio) ---------- */
+    button {
+      cursor: pointer;
+      border-radius: 999px;
+      padding: 0.55rem 1.3rem;
+      border: 1.5px solid var(--navy);
+      background: transparent;
+      color: var(--navy);
+      font-weight: 400;
+    }
+
+    button:hover { color: var(--blue); border-color: var(--blue); }
+
+    button.primary {
+      background: var(--navy);
+      color: var(--paper);
+    }
+
+    button.primary:hover { background: var(--blue); color: var(--paper); }
+
+    button.quiet {
+      border-color: transparent;
+      color: var(--muted);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      padding: 0.55rem 0.3rem;
+    }
+
+    button.quiet:hover { color: var(--blue); border-color: transparent; }
+
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      white-space: nowrap;
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--blue);
+      outline-offset: 3px;
+    }
+
+    .form-message {
+      color: var(--rose);
+      font-size: 0.95rem;
+      margin: 0.75rem 0 0;
+      min-height: 1.2em;
+    }
+
+    /* ---------- The board ---------- */
+    .board-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.75rem;
+    }
+
+    .board-header h2 { margin: 0; }
+    .board-header select { width: auto; }
+
+    .request {
+      display: grid;
+      grid-template-columns: 120px 1fr auto;
+      gap: 1.25rem;
+      align-items: baseline;
+      padding: 1.5rem 0;
+      border-top: 1px solid var(--mist);
+    }
+
+    .request:last-child { border-bottom: 1px solid var(--mist); }
+
+    .date { font-weight: 400; color: var(--navy); }
+    .time { color: var(--blue); font-size: 0.95rem; }
+    .people, .note { color: var(--muted); font-size: 0.95rem; }
+
+    .class-name { font-size: 1.6rem; font-weight: 600; margin: 0; }
+    .people { margin: 0; }
+    .note { margin: 0.5rem 0 0; font-style: italic; }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+    }
+
+    .actions select { width: auto; }
+
+    .status {
+      font-size: 0.85rem;
+      font-weight: 400;
+      padding: 0.15rem 0.8rem;
+      border: 1.5px solid currentColor;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    .status-open     { color: var(--amber); }
+    .status-filled   { color: var(--blue); }
+    .status-updated  { color: var(--muted); }
+    .status-canceled { color: var(--rose); }
+
+    /* Canceled classes get crossed out, like in the original sheet */
+    .canceled .class-name,
+    .canceled .date,
+    .canceled .time {
+      text-decoration: line-through;
+      color: var(--muted);
+    }
+
+    .empty {
+      color: var(--muted);
+      padding: 1.5rem 0;
+      border-top: 1px solid var(--mist);
+      border-bottom: 1px solid var(--mist);
+      margin: 0;
+    }
+
+    /* ---------- Instructor list ---------- */
+    .roster {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 2rem;
+    }
+
+    .roster li {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+      padding: 1rem 0;
+      border-top: 1px solid var(--mist);
+    }
+
+    .roster li:last-child { border-bottom: 1px solid var(--mist); }
+    .roster strong { font-weight: 400; color: var(--navy); }
+    .roster .classes { color: var(--muted); font-size: 0.95rem; }
+    .roster li.editing { align-items: start; }
+    .roster .checkboxes { margin-top: 0.6rem; }
+    .roster .form-message { margin-top: 0.5rem; }
+
+    .row-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      flex-shrink: 0;
+    }
+
+    .reset { color: var(--muted); font-size: 0.95rem; }
+
+    /* ---------- Cancellation report (manager only) ---------- */
+    .report-intro {
+      color: var(--muted);
+      max-width: 40rem;
+      margin: 0 0 1.5rem;
+    }
+
+    .table-wrap { overflow-x: auto; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+    }
+
+    th, td {
+      padding: 0.7rem 0.75rem;
+      border-bottom: 1px solid var(--mist);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th { font-weight: 400; color: var(--navy); white-space: nowrap; }
+
+    th.count, td.count {
+      text-align: center;
+      padding-left: 0.4rem;
+      padding-right: 0.4rem;
+      min-width: 2.4em;
+    }
+
+    th .year {
+      display: block;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    /* Keep the class names in view while scrolling through the months */
+    th:first-child, td:first-child {
+      position: sticky;
+      left: 0;
+      background: var(--paper);
+      min-width: 160px;
+    }
+
+    td.zero { color: #C3CFDB; }
+    td .slot { color: var(--muted); font-size: 0.9rem; }
+
+    td.high {
+      color: var(--rose);
+      font-weight: 500;
+    }
+
+    .flag {
+      color: var(--rose);
+      white-space: nowrap;
+    }
+
+    /* ---------- Confirmation message that pops up at the bottom ---------- */
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 24px;
+      transform: translate(-50%, 16px);
+      background: var(--deep);
+      color: #FFFFFF;
+      padding: 0.6rem 1.4rem;
+      border-radius: 999px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s, transform 0.2s;
+      max-width: calc(100% - 48px);
+      text-align: center;
+      margin: 0;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .toast { transition: none; }
+    }
+
+    /* ---------- Phones: stack everything ---------- */
+    @media (max-width: 600px) {
+      .band nav { padding-bottom: 2.5rem; }
+      .panel { padding: 1.5rem; }
+      .request { grid-template-columns: 1fr; gap: 0.25rem; }
+      .status { justify-self: start; margin-top: 0.4rem; }
+      .roster li { flex-direction: column; gap: 0.25rem; }
+    }
+  </style>
+</head>
+<body>
+  <header class="band">
+    <nav>
+      <a class="name" href="/">Emma Pietsch</a>
+      <a href="/">Back to portfolio</a>
+    </nav>
+    <div class="band-text">
+      <h1>Sub Board</h1>
+      <p class="intro">Post a class you need covered. Only instructors qualified to teach it can claim it.</p>
+
+      <ol class="try-steps">
+        <li>Post a request as any instructor.</li>
+        <li>Claim it as someone else.</li>
+        <li>Switch to Manager to mark it updated.</li>
+      </ol>
+
+      <p class="fine-print">Sample data only. Your changes stay in your own browser.</p>
+    </div>
+  </header>
+
+  <main>
+    <details class="story">
+      <summary>The story behind this project</summary>
+      <p>
+        As Group Fitness Manager at Zenergy, I coordinated subs for 60+ instructors.
+        Requests went out through email chains and group chats, and coverage was
+        tracked across nine separate spreadsheets, so it was hard to tell who had
+        already said yes.
+      </p>
+      <p>
+        I combined everything into one Google Sheet: a tab for each class family,
+        a list of who was qualified to teach each format, and a status column so
+        nothing got missed when updating the booking system. Instructors spent less
+        time on email and thanked me for it.
+      </p>
+      <p>
+        The studio has since moved to a dedicated scheduling platform. This prototype
+        is my take on the next step for my own system: replacing the email blast by
+        showing each request only to the people who can actually cover it.
+      </p>
+    </details>
+
+    <div class="view-switch">
+      <span class="label" id="view-label">Viewing as</span>
+      <div class="options" role="group" aria-labelledby="view-label">
+        <button type="button" data-role="instructor" aria-pressed="true">Instructor</button>
+        <button type="button" data-role="manager" aria-pressed="false">Manager</button>
+      </div>
+    </div>
+    <p class="hint">Managers can also add and remove instructors, mark classes as updated in the booking system, and see which classes get canceled most.</p>
+
+    <!-- 1. Post a request -->
+    <section>
+      <h2>Request a sub</h2>
+      <form id="request-form" class="panel">
+        <div class="form-grid">
+          <div>
+            <label for="req-instructor">Your name</label>
+            <select id="req-instructor" required></select>
+          </div>
+          <div>
+            <label for="req-class">Class</label>
+            <select id="req-class" required></select>
+          </div>
+          <div>
+            <label for="req-date">Date</label>
+            <input type="date" id="req-date" required>
+          </div>
+          <div>
+            <label for="req-time">Time</label>
+            <input type="time" id="req-time" required>
+          </div>
+          <div>
+            <button type="submit" class="primary">Post request</button>
+          </div>
+        </div>
+        <p class="form-message" id="request-message"></p>
+      </form>
+    </section>
+
+    <!-- 2. The board -->
+    <section>
+      <div class="board-header">
+        <h2>Requests</h2>
+        <div>
+          <label for="filter-class">Show</label>
+          <select id="filter-class"></select>
+        </div>
+      </div>
+      <div id="board"></div>
+    </section>
+
+    <!-- 3. Instructors and the classes they can teach -->
+    <section>
+      <h2>Instructors</h2>
+      <ul class="roster" id="roster"></ul>
+
+      <form id="instructor-form" class="panel" hidden>
+        <label for="new-name">Add an instructor</label>
+        <input type="text" id="new-name" placeholder="Full name" autocomplete="off">
+        <fieldset>
+          <legend>Classes they can teach</legend>
+          <div class="checkboxes" id="class-checkboxes"></div>
+        </fieldset>
+        <button type="submit" class="primary">Add instructor</button>
+        <p class="form-message" id="instructor-message"></p>
+      </form>
+    </section>
+
+    <!-- 4. Cancellation report (manager view only) -->
+    <section id="report" hidden>
+      <h2>Cancellations over the last 12 months</h2>
+      <p class="report-intro">
+        Classes canceled because no sub could be found. A class canceled
+        <span id="threshold-text"></span> or more times in one month may be worth
+        moving to a new time or replacing.
+      </p>
+      <div class="table-wrap" id="report-table"></div>
+      <div class="actions">
+        <button type="button" id="export-button">Download as CSV</button>
+      </div>
+    </section>
+
+    <p class="reset">
+      <button type="button" class="quiet" id="reset-button">Reset to sample data</button>
+    </p>
+  </main>
+
+  <!-- Pop-up confirmation message -->
+  <p class="toast" id="toast" role="status"></p>
+
+  <script>
+    // ============================================================
+    // 1. Starting data
+    // ============================================================
+
+    // Every class format the studio offers
+    const CLASS_TYPES = [
+      "Body Sculpt", "Power Barre", "Sculpt & Flow", "Step",
+      "Indoor Cycle", "Pilates Mat", "Yoga"
+    ];
+
+    // Sample instructors (all made up) and the classes each can teach
+    const SAMPLE_INSTRUCTORS = [
+      { name: "Ava Reyes",    classes: ["Body Sculpt", "Power Barre"] },
+      { name: "Jordan Lee",   classes: ["Power Barre", "Step", "Body Sculpt"] },
+      { name: "Priya Shah",   classes: ["Power Barre", "Sculpt & Flow"] },
+      { name: "Maya Collins", classes: ["Sculpt & Flow", "Yoga"] },
+      { name: "Lena Park",    classes: ["Indoor Cycle"] },
+      { name: "Tess Romano",  classes: ["Indoor Cycle", "Body Sculpt"] },
+      { name: "Grace Holt",   classes: ["Step", "Power Barre", "Pilates Mat"] }
+    ];
+
+    // Sample requests. Instead of fixed dates, each one says how many days
+    // from today it is, so the demo never shows classes that already happened.
+    // The canceled one uses nextWeekday (3 = Wednesday) so it matches the
+    // Wednesday Sculpt & Flow class in the cancellation history below.
+    const SAMPLE_REQUESTS = [
+      { id: "1", daysAway: 1, time: "06:15", classType: "Body Sculpt",   instructor: "Ava Reyes",    sub: "",            status: "open" },
+      { id: "2", daysAway: 2, time: "08:30", classType: "Power Barre",   instructor: "Priya Shah",   sub: "Jordan Lee",  status: "filled" },
+      { id: "3", nextWeekday: 3, time: "12:30", classType: "Sculpt & Flow", instructor: "Maya Collins", sub: "",            status: "canceled" },
+      { id: "4", daysAway: 4, time: "17:30", classType: "Indoor Cycle",  instructor: "Lena Park",    sub: "Tess Romano", status: "updated" },
+      { id: "5", daysAway: 6, time: "10:00", classType: "Step",          instructor: "Grace Holt",   sub: "",            status: "open" }
+    ];
+
+    // Past cancellations, so the manager's report has something to show.
+    // Each class runs on the same weekday every week (0 = Sunday, 3 = Wednesday),
+    // and weeksAgo lists which weeks it was canceled.
+    const SAMPLE_CANCELLATIONS = [
+      { classType: "Sculpt & Flow", weekday: 3, time: "12:30", instructor: "Maya Collins", weeksAgo: [1, 2, 3, 5, 6, 8, 9, 10, 14, 19, 27, 41] },
+      { classType: "Pilates Mat",   weekday: 6, time: "08:00", instructor: "Grace Holt",   weeksAgo: [2, 11, 16, 17, 18, 30, 44] },
+      { classType: "Indoor Cycle",  weekday: 4, time: "17:30", instructor: "Lena Park",    weeksAgo: [3, 13, 25, 26, 27, 33] },
+      { classType: "Step",          weekday: 5, time: "10:00", instructor: "Grace Holt",   weeksAgo: [1, 6, 22, 35, 48] },
+      { classType: "Yoga",          weekday: 0, time: "09:00", instructor: "Maya Collins", weeksAgo: [12, 38, 50] },
+      { classType: "Body Sculpt",   weekday: 1, time: "06:15", instructor: "Ava Reyes",    weeksAgo: [7, 46] }
+    ];
+
+    // A class canceled this many times in one month gets flagged for review
+    const REVIEW_THRESHOLD = 3;
+
+    // Friendly text for each status
+    const STATUS_LABELS = {
+      open: "Needs a sub",
+      filled: "Sub found",
+      updated: "Updated in system",
+      canceled: "Canceled"
+    };
+
+    // ============================================================
+    // 2. Dates
+    // ============================================================
+
+    // Gives a date as "2026-11-02", a number of days from today
+    function dateFromToday(days) {
+      const date = new Date();
+      date.setDate(date.getDate() + days);
+      const month = String(date.getMonth() + 1).padStart(2, "0");
+      const day = String(date.getDate()).padStart(2, "0");
+      return date.getFullYear() + "-" + month + "-" + day;
+    }
+
+    const TODAY = dateFromToday(0);
+
+    // Gives the date of a weekday a number of weeks ago, e.g. "the Wednesday 2 weeks back"
+    function pastWeekday(weekday, weeksAgo) {
+      const today = new Date();
+      let daysBack = (today.getDay() - weekday + 7) % 7;
+      if (daysBack === 0) daysBack = 7; // always a day before today
+      return dateFromToday(-(daysBack + 7 * (weeksAgo - 1)));
+    }
+
+    // "2026-10" (year and month) from "2026-10-14"
+    function monthKey(dateText) {
+      return dateText.slice(0, 7);
+    }
+
+    // "Oct" from "2026-10"
+    function monthLabel(key) {
+      return new Date(key + "-01T00:00").toLocaleDateString("en-US", { month: "short" });
+    }
+
+    // "Wednesdays" from "2026-10-14"
+    function weekdayPlural(dateText) {
+      return new Date(dateText + "T00:00").toLocaleDateString("en-US", { weekday: "long" }) + "s";
+    }
+
+    // Turns "2026-11-02" into "Mon, Nov 2"
+    function formatDate(dateText) {
+      const date = new Date(dateText + "T00:00");
+      return date.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" });
+    }
+
+    // Turns "17:30" into "5:30 PM"
+    function formatTime(timeText) {
+      const [hours, minutes] = timeText.split(":").map(Number);
+      const suffix = hours >= 12 ? "PM" : "AM";
+      const hour12 = hours % 12 || 12;
+      return hour12 + ":" + String(minutes).padStart(2, "0") + " " + suffix;
+    }
+
+    // ============================================================
+    // 3. Saving and loading (in this browser only)
+    // ============================================================
+
+    const STORAGE_KEY = "subBoardData";
+
+    // What gets saved to the history when a class is canceled
+    function cancellationRecord(request) {
+      return {
+        date: request.date,
+        time: request.time,
+        classType: request.classType,
+        instructor: request.instructor
+      };
+    }
+
+    function sampleData() {
+      // Make a fresh copy so the samples themselves never get changed
+      const copy = JSON.parse(JSON.stringify({
+        instructors: SAMPLE_INSTRUCTORS,
+        requests: SAMPLE_REQUESTS
+      }));
+      // Swap "days away" for a real date
+      copy.requests.forEach(request => {
+        if (request.nextWeekday !== undefined) {
+          // Days until that weekday comes around again (1 to 7 days ahead)
+          const daysAway = (request.nextWeekday - new Date().getDay() + 7) % 7 || 7;
+          request.date = dateFromToday(daysAway);
+          delete request.nextWeekday;
+        } else {
+          request.date = dateFromToday(request.daysAway);
+          delete request.daysAway;
+        }
+      });
+
+      // Build the cancellation history from the samples above
+      copy.history = [];
+      SAMPLE_CANCELLATIONS.forEach(item => {
+        item.weeksAgo.forEach(weeks => {
+          copy.history.push({
+            date: pastWeekday(item.weekday, weeks),
+            time: item.time,
+            classType: item.classType,
+            instructor: item.instructor
+          });
+        });
+      });
+      // The canceled class on the board counts too
+      copy.requests
+        .filter(request => request.status === "canceled")
+        .forEach(request => copy.history.push(cancellationRecord(request)));
+
+      return copy;
+    }
+
+    function loadData() {
+      let loaded = null;
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved) loaded = JSON.parse(saved);
+      } catch (error) {
+        // If saving isn't available, just use the samples
+      }
+      if (!loaded) return sampleData();
+
+      // Classes that already happened drop off the board
+      // (canceled ones are still counted in the history)
+      loaded.requests = loaded.requests.filter(request => request.date >= TODAY);
+
+      // Data saved by an older version of this page has no history yet
+      if (!loaded.history) loaded.history = sampleData().history;
+      return loaded;
+    }
+
+    function saveData() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+      } catch (error) {
+        // If saving isn't available, the page still works until it's refreshed
+      }
+    }
+
+    let data = loadData();
+    let role = "instructor"; // who is using the page: "instructor" or "manager"
+    let editingIndex = null; // which instructor's classes are being edited, if any
+
+    // ============================================================
+    // 4. Small helpers
+    // ============================================================
+
+    // Makes typed text safe to put on the page (so a name can't break the HTML)
+    function safe(text) {
+      return String(text)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+
+    function findRequest(id) {
+      return data.requests.find(request => request.id === id);
+    }
+
+    // Instructors who can teach this class, not counting the person asking
+    function qualifiedSubs(request) {
+      return data.instructors.filter(person =>
+        person.classes.includes(request.classType) && person.name !== request.instructor
+      );
+    }
+
+    // Shows a short confirmation at the bottom of the screen for 3 seconds
+    const toast = document.getElementById("toast");
+    let toastTimer;
+    function announce(message) {
+      toast.textContent = message;
+      toast.classList.add("show");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove("show"), 3000);
+    }
+
+    // ============================================================
+    // 5. Drawing the page
+    // ============================================================
+
+    const board = document.getElementById("board");
+    const roster = document.getElementById("roster");
+    const filterSelect = document.getElementById("filter-class");
+    const nameSelect = document.getElementById("req-instructor");
+    const classSelect = document.getElementById("req-class");
+    const dateInput = document.getElementById("req-date");
+
+    // The date picker won't offer days before today
+    dateInput.min = TODAY;
+
+    // Fill in the "Your name" dropdown, keeping whatever was already picked
+    function drawNameOptions() {
+      const current = nameSelect.value;
+      const names = data.instructors.map(person => person.name).sort();
+      nameSelect.innerHTML = '<option value="">Select your name</option>' +
+        names.map(name => `<option>${safe(name)}</option>`).join("");
+      if (names.includes(current)) nameSelect.value = current;
+      drawClassOptions();
+    }
+
+    // The class dropdown only lists classes the chosen instructor teaches
+    function drawClassOptions() {
+      const person = data.instructors.find(p => p.name === nameSelect.value);
+      if (!person) {
+        classSelect.innerHTML = '<option value="">Choose your name first</option>';
+        classSelect.disabled = true;
+        return;
+      }
+      classSelect.disabled = false;
+      classSelect.innerHTML = person.classes
+        .map(type => `<option>${safe(type)}</option>`).join("");
+    }
+
+    // The actions shown under each request depend on its status and who is viewing
+    function actionsFor(request) {
+      if (request.status === "open") {
+        const subs = qualifiedSubs(request);
+        const cancel = `<button type="button" class="quiet" data-action="cancel" data-id="${request.id}">Cancel class</button>`;
+        if (subs.length === 0) {
+          const nextStep = role === "manager" ? "Add an instructor below." : "Ask the manager to add one.";
+          return `<p class="note">No one else is qualified for ${safe(request.classType)} yet. ${nextStep}</p>
+                  <div class="actions">${cancel}</div>`;
+        }
+        const options = subs.map(p => `<option>${safe(p.name)}</option>`).join("");
+        return `
+          <div class="actions">
+            <select id="sub-${request.id}" aria-label="Choose a sub">
+              <option value="">Choose a sub</option>${options}
+            </select>
+            <button type="button" data-action="claim" data-id="${request.id}">Claim</button>
+            ${cancel}
+          </div>`;
+      }
+
+      if (request.status === "filled") {
+        if (role === "manager") {
+          return `<div class="actions">
+                    <button type="button" data-action="update" data-id="${request.id}">Mark updated in system</button>
+                  </div>`;
+        }
+        return `<p class="note">Waiting for the manager to update the booking system.</p>`;
+      }
+
+      // Updated or canceled: only the manager can clear it off the board
+      if (role === "manager") {
+        return `<div class="actions">
+                  <button type="button" class="quiet" data-action="remove" data-id="${request.id}">Remove from board</button>
+                </div>`;
+      }
+      return "";
+    }
+
+    // Draw every request, soonest first, matching the class filter
+    function drawBoard() {
+      const filter = filterSelect.value;
+      const shown = data.requests
+        .filter(request => filter === "all" || request.classType === filter)
+        .sort((a, b) => (a.date + a.time).localeCompare(b.date + b.time));
+
+      if (shown.length === 0) {
+        board.innerHTML = '<p class="empty">No sub requests here. Post one above.</p>';
+        return;
+      }
+
+      board.innerHTML = shown.map(request => {
+        const people = request.sub
+          ? `${safe(request.sub)} covering for ${safe(request.instructor)}`
+          : `${safe(request.instructor)} needs coverage`;
+        return `
+          <article class="request ${request.status}">
+            <div>
+              <div class="date">${formatDate(request.date)}</div>
+              <div class="time">${formatTime(request.time)}</div>
+            </div>
+            <div>
+              <h3 class="class-name">${safe(request.classType)}</h3>
+              <p class="people">${people}</p>
+              ${actionsFor(request)}
+            </div>
+            <span class="status status-${request.status}">${STATUS_LABELS[request.status]}</span>
+          </article>`;
+      }).join("");
+    }
+
+    // Draw the instructor list. Only managers can add, edit, or remove instructors.
+    function drawRoster() {
+      document.getElementById("instructor-form").hidden = role !== "manager";
+
+      roster.innerHTML = data.instructors.map((person, index) => {
+        // The instructor being edited gets checkboxes instead of plain text
+        if (role === "manager" && index === editingIndex) {
+          const boxes = CLASS_TYPES.map(type => `
+            <label><input type="checkbox" value="${type}" ${person.classes.includes(type) ? "checked" : ""}> ${type}</label>`).join("");
+          return `
+            <li class="editing">
+              <div>
+                <strong>${safe(person.name)}</strong>
+                <div class="checkboxes" role="group" aria-label="Classes ${safe(person.name)} can teach">${boxes}</div>
+                <p class="form-message" id="edit-message"></p>
+              </div>
+              <div class="row-buttons">
+                <button type="button" class="primary" data-action="save-classes" data-index="${index}">Save classes</button>
+                <button type="button" class="quiet" data-action="cancel-edit">Cancel</button>
+              </div>
+            </li>`;
+        }
+
+        const buttons = role === "manager" ? `
+          <div class="row-buttons">
+            <button type="button" class="quiet" data-action="edit-classes" data-index="${index}">Edit classes</button>
+            <button type="button" class="quiet" data-action="remove-instructor" data-index="${index}">Remove</button>
+          </div>` : "";
+
+        return `
+          <li>
+            <div>
+              <strong>${safe(person.name)}</strong>
+              <div class="classes">${person.classes.map(safe).join(", ")}</div>
+            </div>
+            ${buttons}
+          </li>`;
+      }).join("");
+
+      // Put the keyboard focus on the first checkbox when editing starts
+      const firstBox = roster.querySelector(".editing input");
+      if (firstBox) firstBox.focus();
+    }
+
+    // Manager's report: cancellations per class, per month
+    function drawReport() {
+      const section = document.getElementById("report");
+      section.hidden = role !== "manager";
+      if (role !== "manager") return;
+
+      document.getElementById("threshold-text").textContent = REVIEW_THRESHOLD;
+      const table = document.getElementById("report-table");
+
+      // The table's columns: this month and the 11 before it, oldest first.
+      // A class canceled ahead of time for next month adds that month too.
+      const months = [];
+      const cursor = new Date();
+      cursor.setDate(1);
+      cursor.setMonth(cursor.getMonth() - 11);
+      const latest = data.history.reduce((max, item) => monthKey(item.date) > max ? monthKey(item.date) : max, monthKey(TODAY));
+      while (true) {
+        const key = cursor.getFullYear() + "-" + String(cursor.getMonth() + 1).padStart(2, "0");
+        if (key > latest) break;
+        months.push(key);
+        cursor.setMonth(cursor.getMonth() + 1);
+      }
+
+      const recent = data.history.filter(item => monthKey(item.date) >= months[0]);
+
+      if (recent.length === 0) {
+        table.innerHTML = '<p class="empty">No cancellations in the last 12 months.</p>';
+        return;
+      }
+
+      // Group cancellations by class slot: same class, same weekday, same time
+      const slots = {};
+      recent.forEach(item => {
+        const key = item.classType + "|" + weekdayPlural(item.date) + "|" + item.time;
+        if (!slots[key]) {
+          slots[key] = {
+            classType: item.classType,
+            when: weekdayPlural(item.date) + ", " + formatTime(item.time),
+            byMonth: {},
+            total: 0
+          };
+        }
+        const month = monthKey(item.date);
+        slots[key].byMonth[month] = (slots[key].byMonth[month] || 0) + 1;
+        slots[key].total += 1;
+      });
+
+      // Most-canceled classes first
+      const rows = Object.values(slots).sort((a, b) => b.total - a.total);
+
+      const header = `
+        <tr>
+          <th scope="col">Class</th>
+          ${months.map((m, i) => {
+            const showYear = i === 0 || m.endsWith("-01");
+            return `<th scope="col" class="count">${monthLabel(m)}${showYear ? `<span class="year">${m.slice(0, 4)}</span>` : ""}</th>`;
+          }).join("")}
+          <th scope="col" class="count">Total</th>
+          <th scope="col"><span class="visually-hidden">Review</span></th>
+        </tr>`;
+
+      const body = rows.map(row => {
+        const cells = months.map(m => {
+          const count = row.byMonth[m] || 0;
+          const style = count === 0 ? "zero" : count >= REVIEW_THRESHOLD ? "high" : "";
+          return `<td class="count ${style}">${count}</td>`;
+        }).join("");
+        const needsReview = months.some(m => (row.byMonth[m] || 0) >= REVIEW_THRESHOLD);
+        return `
+          <tr>
+            <td>${safe(row.classType)}<div class="slot">${row.when}</div></td>
+            ${cells}
+            <td class="count">${row.total}</td>
+            <td>${needsReview ? '<span class="flag">Worth reviewing</span>' : ""}</td>
+          </tr>`;
+      }).join("");
+
+      table.innerHTML = `<table><thead>${header}</thead><tbody>${body}</tbody></table>`;
+    }
+
+    // Redraw everything and save. Called after every change.
+    function update() {
+      saveData();
+      drawNameOptions();
+      drawBoard();
+      drawRoster();
+      drawReport();
+    }
+
+    // These two only need to be drawn once, since the class list never changes
+    filterSelect.innerHTML = '<option value="all">All classes</option>' +
+      CLASS_TYPES.map(type => `<option>${type}</option>`).join("");
+
+    document.getElementById("class-checkboxes").innerHTML = CLASS_TYPES.map(type => `
+      <label><input type="checkbox" value="${type}"> ${type}</label>`).join("");
+
+    // ============================================================
+    // 6. Responding to what people do
+    // ============================================================
+
+    nameSelect.addEventListener("change", drawClassOptions);
+    filterSelect.addEventListener("change", drawBoard);
+
+    // Switching between the instructor and manager views
+    const roleButtons = document.querySelectorAll("[data-role]");
+    roleButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        role = button.dataset.role;
+        editingIndex = null;
+        roleButtons.forEach(b => b.setAttribute("aria-pressed", String(b === button)));
+        drawBoard();
+        drawRoster();
+        drawReport();
+        announce(role === "manager" ? "Now viewing as the manager." : "Now viewing as an instructor.");
+      });
+    });
+
+    // Posting a new request
+    document.getElementById("request-form").addEventListener("submit", function (event) {
+      event.preventDefault(); // stop the page from reloading
+      const message = document.getElementById("request-message");
+      const newRequest = {
+        id: String(Date.now()),
+        date: dateInput.value,
+        time: document.getElementById("req-time").value,
+        classType: classSelect.value,
+        instructor: nameSelect.value,
+        sub: "",
+        status: "open"
+      };
+
+      if (newRequest.date < TODAY) {
+        message.textContent = "Pick today or a later date.";
+        return;
+      }
+
+      const duplicate = data.requests.some(r =>
+        r.date === newRequest.date &&
+        r.time === newRequest.time &&
+        r.classType === newRequest.classType &&
+        r.status !== "canceled"
+      );
+      if (duplicate) {
+        message.textContent = "There's already a request for " + newRequest.classType + " at that date and time.";
+        return;
+      }
+
+      data.requests.push(newRequest);
+      this.reset();
+      message.textContent = "";
+      update();
+      announce("Request posted.");
+    });
+
+    // Buttons on the board: claim, cancel, mark updated, remove
+    board.addEventListener("click", function (event) {
+      const button = event.target.closest("button");
+      if (!button) return;
+      const request = findRequest(button.dataset.id);
+      const action = button.dataset.action;
+
+      if (action === "claim") {
+        const choice = document.getElementById("sub-" + request.id);
+        if (!choice.value) {
+          choice.focus();
+          announce("Choose who's covering first.");
+          return;
+        }
+        request.sub = choice.value;
+        request.status = "filled";
+        update();
+        announce(request.sub + " is covering " + request.classType + ".");
+      }
+
+      if (action === "cancel") {
+        const sure = confirm("Cancel " + request.classType + " on " + formatDate(request.date) + "? This can't be undone.");
+        if (!sure) return;
+        request.status = "canceled";
+        data.history.push(cancellationRecord(request)); // counted in the manager's report
+        update();
+        announce("Class canceled.");
+      }
+
+      if (action === "update") {
+        request.status = "updated";
+        update();
+        announce("Marked as updated in the system.");
+      }
+
+      if (action === "remove") {
+        data.requests = data.requests.filter(r => r.id !== request.id);
+        update();
+        announce("Removed from the board.");
+      }
+    });
+
+    // Adding an instructor (manager view only)
+    document.getElementById("instructor-form").addEventListener("submit", function (event) {
+      event.preventDefault();
+      const message = document.getElementById("instructor-message");
+      const name = document.getElementById("new-name").value.trim();
+      const classes = [...this.querySelectorAll("input[type=checkbox]:checked")]
+        .map(box => box.value);
+
+      if (!name) {
+        message.textContent = "Enter the instructor's name.";
+        return;
+      }
+      if (data.instructors.some(p => p.name.toLowerCase() === name.toLowerCase())) {
+        message.textContent = name + " is already on the list.";
+        return;
+      }
+      if (classes.length === 0) {
+        message.textContent = "Check at least one class they can teach.";
+        return;
+      }
+
+      data.instructors.push({ name: name, classes: classes });
+      this.reset();
+      message.textContent = "";
+      update();
+      announce(name + " added.");
+    });
+
+    // Editing and removing instructors (manager view only)
+    roster.addEventListener("click", function (event) {
+      const button = event.target.closest("button");
+      if (!button) return;
+      const action = button.dataset.action;
+      const index = Number(button.dataset.index);
+      const person = data.instructors[index];
+
+      if (action === "edit-classes") {
+        editingIndex = index;
+        drawRoster();
+      }
+
+      if (action === "cancel-edit") {
+        editingIndex = null;
+        drawRoster();
+      }
+
+      if (action === "save-classes") {
+        const classes = [...roster.querySelectorAll(".editing input:checked")]
+          .map(box => box.value);
+        if (classes.length === 0) {
+          document.getElementById("edit-message").textContent = "Check at least one class they can teach.";
+          return;
+        }
+        person.classes = classes;
+        editingIndex = null;
+        update();
+        announce(person.name + "'s classes updated.");
+      }
+
+      if (action === "remove-instructor") {
+        if (!confirm("Remove " + person.name + " from the instructor list?")) return;
+        data.instructors.splice(index, 1);
+        editingIndex = null;
+        update();
+        announce(person.name + " removed.");
+      }
+    });
+
+    // Downloading the cancellation history as a CSV file (opens in Excel,
+    // Google Sheets, or Python). Each row is one canceled class.
+    function csvField(value) {
+      const text = String(value);
+      // Fields with commas or quotes get wrapped in quotes, per the CSV format
+      return /[",\n]/.test(text) ? '"' + text.replace(/"/g, '""') + '"' : text;
+    }
+
+    document.getElementById("export-button").addEventListener("click", function () {
+      const header = ["date", "weekday", "time", "class_type", "instructor"];
+      const rows = data.history
+        .slice()
+        .sort((a, b) => (a.date + a.time).localeCompare(b.date + b.time))
+        .map(item => [
+          item.date,
+          new Date(item.date + "T00:00").toLocaleDateString("en-US", { weekday: "long" }),
+          item.time,
+          item.classType,
+          item.instructor
+        ]);
+
+      const csv = [header, ...rows].map(row => row.map(csvField).join(",")).join("\n");
+
+      // Turn the text into a file and start the download
+      const file = new Blob([csv], { type: "text/csv" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(file);
+      link.download = "cancellations-" + TODAY + ".csv";
+      link.click();
+      URL.revokeObjectURL(link.href);
+      announce("Downloaded " + rows.length + " cancellations.");
+    });
+
+    // Starting over with the sample data
+    document.getElementById("reset-button").addEventListener("click", function () {
+      if (confirm("Clear your changes and go back to the sample data?")) {
+        data = sampleData();
+        editingIndex = null;
+        update();
+        announce("Back to the sample data.");
+      }
+    });
+
+    // Draw the page for the first time
+    update();
+  </script>
+</body>
+</html>
