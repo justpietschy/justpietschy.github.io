@@ -233,3 +233,14 @@ h3 { font-family: var(--serif); font-weight: 600; font-size: 1.6rem; line-height
   section { padding-top: 5rem; }
   .gallery { grid-template-columns: 1fr; }
 }
+.board-preview { background: var(--paper); border-radius: 14px; padding: 1rem 1.5rem; }
+.preview-row { display: grid; grid-template-columns: 4.5rem 1fr auto; gap: 1rem; align-items: baseline; padding: 0.9rem 0; border-top: 1px solid var(--mist); font-size: 0.95rem; }
+.preview-row:first-child { border-top: none; }
+.preview-row .when { color: var(--blue); line-height: 1.4; }
+.preview-row .cls { display: block; font-family: var(--serif); font-size: 1.35rem; font-weight: 600; color: var(--navy); line-height: 1.2; }
+.preview-row .who { display: block; font-size: 0.85rem; color: var(--silver); }
+.preview-row.canceled .cls { text-decoration: line-through; color: var(--silver); }
+.pill { font-size: 0.8rem; padding: 0.1rem 0.7rem; border: 1.5px solid currentColor; border-radius: 999px; white-space: nowrap; }
+.pill.open { color: #A06A12; }
+.pill.filled { color: var(--blue); }
+.pill.canceled { color: #A44A4A; }
